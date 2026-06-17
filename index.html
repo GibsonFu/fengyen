@@ -9,51 +9,103 @@
     --navy:#0d2b4e;
     --navy-dark:#081b33;
     --gold:#c9a45c;
+    --gold-light:#e0bd7c;
     --gray-bg:#f5f6f8;
     --text:#2b2f36;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
   body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;color:var(--text);line-height:1.8;background:#fff;}
   a{text-decoration:none;color:inherit;}
   img{max-width:100%;display:block;}
   .container{max-width:1100px;margin:0 auto;padding:0 24px;}
 
-  /* Header */
-  header{position:fixed;top:0;left:0;right:0;background:rgba(13,43,78,0.95);z-index:100;backdrop-filter:blur(4px);}
+  /* ── Header ── */
+  header{
+    position:fixed;top:0;left:0;right:0;
+    background:rgba(13,43,78,0.95);
+    z-index:100;backdrop-filter:blur(6px);
+    transition:box-shadow .3s, padding .3s;
+  }
+  header.scrolled{box-shadow:0 2px 20px rgba(0,0,0,0.3);}
   header .container{display:flex;justify-content:space-between;align-items:center;height:64px;}
   .logo{color:#fff;font-size:20px;font-weight:700;letter-spacing:2px;}
-  nav a{color:#e8e8e8;margin-left:28px;font-size:14px;transition:color .2s;}
-  nav a:hover{color:var(--gold);}
+  nav a{
+    color:#e8e8e8;margin-left:28px;font-size:14px;
+    transition:color .2s;position:relative;padding-bottom:2px;
+  }
+  nav a::after{
+    content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+    background:var(--gold);transform:scaleX(0);transition:transform .25s;
+  }
+  nav a.active,nav a:hover{color:var(--gold);}
+  nav a.active::after,nav a:hover::after{transform:scaleX(1);}
 
-  /* Hero */
+  /* Hamburger */
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+  .hamburger span{display:block;width:24px;height:2px;background:#fff;transition:transform .3s, opacity .3s;}
+  .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .hamburger.open span:nth-child(2){opacity:0;}
+  .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  /* Mobile nav overlay */
+  .mobile-nav{
+    display:none;position:fixed;top:64px;left:0;right:0;
+    background:rgba(8,27,51,0.97);z-index:99;
+    flex-direction:column;align-items:center;gap:0;
+    max-height:0;overflow:hidden;transition:max-height .4s ease;
+  }
+  .mobile-nav.open{max-height:300px;}
+  .mobile-nav a{
+    color:#e8e8e8;font-size:17px;padding:18px 0;width:100%;text-align:center;
+    border-bottom:1px solid rgba(255,255,255,0.06);transition:color .2s,background .2s;
+  }
+  .mobile-nav a:hover{color:var(--gold);background:rgba(201,164,92,0.08);}
+
+  /* ── Hero ── */
   .hero{
     position:relative;height:90vh;min-height:520px;overflow:hidden;
     display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;padding:0 20px;
   }
-  .hero-video{
-    position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;
-  }
+  .hero-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;}
   .hero-overlay{
     position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;
-    background:linear-gradient(135deg, rgba(8,27,51,0.82), rgba(13,43,78,0.68));
+    background:linear-gradient(135deg,rgba(8,27,51,0.82),rgba(13,43,78,0.68));
   }
   .hero-inner{position:relative;z-index:2;max-width:760px;}
-  .hero h1{font-size:38px;font-weight:700;margin-bottom:18px;letter-spacing:1px;}
+  .hero h1{font-size:38px;font-weight:700;margin-bottom:18px;letter-spacing:1px;line-height:1.4;}
   .hero p{font-size:18px;color:#dfe6ee;margin-bottom:36px;}
   .btn{
     display:inline-block;background:var(--gold);color:var(--navy-dark);
     padding:14px 36px;border-radius:4px;font-weight:700;font-size:15px;
-    letter-spacing:1px;transition:transform .2s, background .2s;
+    letter-spacing:1px;transition:transform .2s,background .2s,box-shadow .2s;
   }
-  .btn:hover{background:#e0bd7c;transform:translateY(-2px);}
+  .btn:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,164,92,0.4);}
 
-  /* Section general */
+  /* Scroll cue */
+  .scroll-cue{
+    position:absolute;bottom:32px;left:50%;transform:translateX(-50%);z-index:2;
+    display:flex;flex-direction:column;align-items:center;gap:6px;opacity:.7;
+  }
+  .scroll-cue span{color:#fff;font-size:11px;letter-spacing:2px;text-transform:uppercase;}
+  .scroll-cue-arrow{width:20px;height:20px;border-right:2px solid #fff;border-bottom:2px solid #fff;
+    transform:rotate(45deg);animation:bounce 1.4s infinite;}
+  @keyframes bounce{0%,100%{transform:rotate(45deg) translateY(0);}50%{transform:rotate(45deg) translateY(6px);}}
+
+  /* ── Fade-in animations ── */
+  .fade-up{opacity:0;transform:translateY(30px);transition:opacity .65s ease,transform .65s ease;}
+  .fade-up.visible{opacity:1;transform:translateY(0);}
+  .fade-up.delay-1{transition-delay:.1s;}
+  .fade-up.delay-2{transition-delay:.2s;}
+  .fade-up.delay-3{transition-delay:.3s;}
+
+  /* ── Section general ── */
   section{padding:90px 0;}
   .section-title{text-align:center;margin-bottom:56px;}
   .section-title h2{font-size:30px;color:var(--navy);font-weight:700;letter-spacing:1px;}
   .section-title .en{font-size:13px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;}
 
-  /* About */
+  /* ── About ── */
   #about{background:var(--gray-bg);}
   .about-grid{display:flex;gap:60px;align-items:flex-start;flex-wrap:wrap;}
   .about-text{flex:1.3;min-width:300px;}
@@ -62,6 +114,7 @@
   .quote-box{
     background:#fff;border-left:4px solid var(--gold);padding:22px 26px;
     font-size:16px;color:var(--navy);font-style:italic;margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(0,0,0,0.05);border-radius:0 6px 6px 0;
   }
   .about-photo{flex:1;min-width:280px;text-align:center;}
   .photo-placeholder{
@@ -71,110 +124,183 @@
   }
   .founder-name{margin-top:18px;font-size:18px;font-weight:700;color:var(--navy);}
   .founder-title{font-size:14px;color:#7a818c;margin-top:4px;}
-  .resume-box{background:#fff;border-radius:8px;padding:24px 28px;margin-top:36px;box-shadow:0 2px 10px rgba(0,0,0,0.04);}
+  .resume-box{background:#fff;border-radius:8px;padding:24px 28px;margin-top:36px;box-shadow:0 2px 10px rgba(0,0,0,0.06);}
   .resume-box h4{color:var(--navy);margin-bottom:14px;font-size:16px;}
   .resume-box ul{padding-left:20px;color:#4a4f57;}
   .resume-box li{margin-bottom:8px;}
 
-  /* Divider banner */
-  .divider-banner{background:var(--navy);color:#fff;text-align:center;padding:40px 20px;}
+  /* ── Divider banner ── */
+  .divider-banner{background:var(--navy);color:#fff;text-align:center;padding:50px 20px;}
   .divider-banner p{font-size:22px;font-weight:700;letter-spacing:1px;}
+  .divider-banner .sub{font-size:14px;color:rgba(255,255,255,0.6);margin-top:10px;font-weight:400;letter-spacing:.5px;}
 
-  /* Courses */
+  /* ── Courses ── */
   .course-grid{display:flex;gap:28px;flex-wrap:wrap;}
   .course-card{
     flex:1;min-width:280px;background:#fff;border-radius:10px;
     box-shadow:0 4px 18px rgba(0,0,0,0.07);padding:34px 28px;
-    border-top:4px solid var(--gold);transition:transform .25s;
+    border-top:4px solid var(--gold);transition:transform .25s,box-shadow .25s;
   }
-  .course-card:hover{transform:translateY(-6px);}
-  .course-tag{display:inline-block;background:var(--gray-bg);color:var(--navy);font-size:12px;
-    padding:4px 12px;border-radius:20px;margin-bottom:16px;font-weight:700;letter-spacing:1px;}
+  .course-card:hover{transform:translateY(-8px);box-shadow:0 12px 32px rgba(0,0,0,0.12);}
+  .course-tag{
+    display:inline-block;background:var(--gray-bg);color:var(--navy);font-size:12px;
+    padding:4px 12px;border-radius:20px;margin-bottom:16px;font-weight:700;letter-spacing:1px;
+  }
   .course-card h3{color:var(--navy);font-size:19px;margin-bottom:14px;}
   .course-card p{color:#5a5f68;font-size:14px;margin-bottom:18px;}
   .course-card h4{font-size:13px;color:var(--gold);letter-spacing:1px;margin-bottom:10px;}
   .course-card ul{padding-left:18px;color:#4a4f57;font-size:14px;}
   .course-card li{margin-bottom:8px;}
 
-  /* Contact */
+  /* ── Contact ── */
   #contact{background:var(--gray-bg);}
   .contact-grid{display:flex;gap:50px;flex-wrap:wrap;}
   .contact-info{flex:1;min-width:280px;}
-  .contact-info p{color:#4a4f57;margin-bottom:30px;}
-  .info-item{display:flex;margin-bottom:20px;}
-  .info-label{width:90px;color:var(--navy);font-weight:700;flex-shrink:0;}
-  .info-value{color:#4a4f57;}
+  .contact-info > p{color:#4a4f57;margin-bottom:30px;}
+  .info-item{display:flex;margin-bottom:20px;align-items:flex-start;}
+  .info-icon{width:36px;height:36px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-right:14px;margin-top:2px;}
+  .info-icon svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .info-text{}
+  .info-label{color:var(--navy);font-weight:700;font-size:13px;letter-spacing:.5px;}
+  .info-value{color:#4a4f57;font-size:14px;margin-top:2px;}
   .placeholder-text{color:#b08a3e;font-style:italic;}
-  .map-wrap{flex:1;min-width:280px;}
-  .map-placeholder{
-    background:#dfe3e8;border:2px dashed #b7bdc6;border-radius:8px;
-    height:300px;display:flex;align-items:center;justify-content:center;
-    color:#7a818c;font-size:14px;text-align:center;padding:20px;
+
+  /* Contact form */
+  .contact-form-wrap{flex:1.2;min-width:300px;}
+  .contact-form{background:#fff;border-radius:10px;padding:36px 32px;box-shadow:0 4px 20px rgba(0,0,0,0.07);}
+  .contact-form h3{color:var(--navy);font-size:18px;margin-bottom:24px;font-weight:700;}
+  .form-row{display:flex;gap:16px;flex-wrap:wrap;}
+  .form-group{display:flex;flex-direction:column;margin-bottom:18px;flex:1;min-width:140px;}
+  .form-group label{font-size:13px;color:var(--navy);font-weight:700;margin-bottom:6px;letter-spacing:.4px;}
+  .form-group input,.form-group select,.form-group textarea{
+    border:1.5px solid #d8dce3;border-radius:6px;padding:10px 14px;
+    font-size:14px;font-family:inherit;color:var(--text);
+    transition:border-color .2s,box-shadow .2s;outline:none;background:#fafbfc;
   }
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+    border-color:var(--navy);box-shadow:0 0 0 3px rgba(13,43,78,0.08);background:#fff;
+  }
+  .form-group textarea{resize:vertical;min-height:110px;line-height:1.6;}
+  .form-group select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230d2b4e' stroke-width='1.8' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;}
+  .form-submit{
+    width:100%;background:var(--navy);color:#fff;border:none;cursor:pointer;
+    padding:14px;border-radius:6px;font-size:15px;font-weight:700;letter-spacing:1px;
+    font-family:inherit;transition:background .2s,transform .2s,box-shadow .2s;
+  }
+  .form-submit:hover{background:var(--gold);color:var(--navy-dark);transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,164,92,0.35);}
+  .form-success{display:none;text-align:center;padding:24px;color:var(--navy);}
+  .form-success .check{font-size:40px;margin-bottom:12px;}
 
-  footer{background:var(--navy-dark);color:#aeb8c4;text-align:center;padding:28px 20px;font-size:13px;}
+  /* ── Footer ── */
+  .map-embed{margin-top:24px;border-radius:8px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.1);}
 
+  footer{background:var(--navy-dark);color:#aeb8c4;text-align:center;padding:36px 20px;font-size:13px;}
+  footer .footer-logo{color:#fff;font-size:17px;font-weight:700;letter-spacing:2px;margin-bottom:10px;}
+  footer .footer-links{margin-bottom:16px;}
+  footer .footer-links a{color:#aeb8c4;margin:0 12px;font-size:13px;transition:color .2s;}
+  footer .footer-links a:hover{color:var(--gold);}
+  footer .copy{color:#6b7785;}
+
+  /* ── Back to top ── */
+  .back-top{
+    position:fixed;bottom:32px;right:28px;z-index:90;
+    width:44px;height:44px;background:var(--navy);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    box-shadow:0 4px 16px rgba(0,0,0,0.2);border:none;
+    opacity:0;pointer-events:none;transition:opacity .3s,background .2s,transform .2s;
+  }
+  .back-top.show{opacity:1;pointer-events:all;}
+  .back-top:hover{background:var(--gold);transform:translateY(-3px);}
+  .back-top svg{width:18px;height:18px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* ── Responsive ── */
   @media(max-width:768px){
     nav{display:none;}
-    .hero h1{font-size:28px;}
+    .hamburger{display:flex;}
+    .mobile-nav{display:flex;}
+    .hero h1{font-size:26px;}
     .hero p{font-size:15px;}
     section{padding:60px 0;}
+    .contact-form{padding:24px 20px;}
+    .about-grid{flex-direction:column-reverse;}
   }
 </style>
 </head>
 <body>
 
-<header>
+<header id="site-header">
   <div class="container">
     <div class="logo">豐簷 FENGYEN</div>
-    <nav>
-      <a href="#about">關於豐簷</a>
-      <a href="#courses">專業課程</a>
-      <a href="#contact">聯絡我們</a>
+    <nav id="desktop-nav">
+      <a href="#about" data-section="about">關於豐簷</a>
+      <a href="#courses" data-section="courses">專業課程</a>
+      <a href="#contact" data-section="contact">聯絡我們</a>
     </nav>
+    <button class="hamburger" id="hamburger" aria-label="開啟選單">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
+
+<div class="mobile-nav" id="mobile-nav">
+  <a href="#about" class="mobile-link">關於豐簷</a>
+  <a href="#courses" class="mobile-link">專業課程</a>
+  <a href="#contact" class="mobile-link">聯絡我們</a>
+</div>
 
 <section class="hero">
   <video class="hero-video" autoplay muted loop playsinline>
     <source src="eave-rain.mp4" type="video/mp4">
   </video>
   <div class="hero-overlay"></div>
-  <div class="hero-inner">
+  <div class="hero-inner fade-up">
     <h1>豐簷 —— 您最堅實的醫藥行銷策略夥伴</h1>
     <p>淬鍊多年實戰經驗，打造可落地的專業培訓，全面驅動企業成長。</p>
     <a href="#courses" class="btn">了解專業課程</a>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-cue-arrow"></div>
   </div>
 </section>
 
 <section id="about">
   <div class="container">
-    <div class="section-title">
+    <div class="section-title fade-up">
       <div class="en">About Fengyen</div>
       <h2>關於豐簷</h2>
     </div>
     <div class="about-grid">
-      <div class="about-photo">
-        <div class="photo-placeholder">
-          [圖片位置：鄭傳吉老師專業形象照]<br><br>
-          （請提供老師指定的形象照檔案以上傳）
-        </div>
+      <div class="about-photo fade-up">
+        <img src="鄭傳吉老師專業形象照.png" alt="鄭傳吉老師專業形象照" style="width:100%;max-width:320px;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.12);margin:0 auto;">
         <div class="founder-name">鄭傳吉 老師</div>
         <div class="founder-title">豐簷創辦人</div>
       </div>
-      <div class="about-text">
+      <div class="about-text fade-up delay-1">
         <h3>創立宗旨</h3>
-        <p>豐簷專注於醫藥行銷領域，秉持「大道至簡」的核心精神與第一性原理，直指市場進入與業績成長的核心任務。我們以符合醫藥產業特性的專業模式，將多年的市場實戰經驗，轉化為專業且「絕對可落地執行」的培訓課程，致力於推動醫藥企業內部人才的專業職能全面提升。</p>
+        <p>在瞬息萬變的醫藥行銷領域中，豐簷始終堅守培育與傳承的核心信念。我們深知，企業最核心的競爭力來自於人才的底蘊。因此，我們將推動市場進入與業績成長的戰略思維，融入業界實戰導師引路與陪伴的精神，為醫藥企業建構一套扎根基層、放眼未來的培訓藍圖。透過高度符合產業特性的專業模式，我們將多年的實戰精華，轉譯為「絕對可落地執行」的賦能課程。豐簷致力於厚植企業內部人才的專業實力，讓成功經驗不再只是口耳相傳，而是化作源源不絕的成長動能，與企業攜手共創長遠的卓越價值。</p>
         <h3>創辦人的話</h3>
         <div class="quote-box">
-          「真正的專業，是將複雜的市場化為清晰的策略，並讓前線同仁能夠確實執行，創造價值。」
+          「我們常常在講人才培育，但培訓的最終目的，絕對不是只讓大家在課堂上學會一套方法而已，而是要看這些方法能不能在真實的市場裡發揮作用。真正的專業，是能夠幫助同仁把行銷的思維、業務的技巧，轉化成每天在市場上能真正派上用場的武器。當我們透過專業的培訓，讓大家不只『知道』，還能確實『做到』，同仁在實戰中拿到了成果，『人』的價值自然就會被無限放大。」
         </div>
         <div class="resume-box">
-          <h4>專業簡歷</h4>
+          <h4>歷任要職</h4>
           <ul>
-            <li>前 台灣邁蘭 (Mylan) 總經理</li>
-            <li>擁有深厚且完整的醫藥產業資歷，從前線業務拓展至跨國藥廠高階管理，具備全方位的市場洞察與企業營運視角。</li>
-            <li>專精於高階領導統御、醫藥行銷策略佈局與業務團隊戰力塑造。</li>
+            <li>總經理　立擎實業有限公司 <span style="color:#888;font-size:13px;">(LEGENE ENTERPRISE CO., LTD.)</span></li>
+            <li>總經理　美國邁蘭大藥廠 <span style="color:#888;font-size:13px;">(Mylan Pharmaceutical, Taiwan Branch)</span></li>
+            <li>處長　德國默克大藥廠 <span style="color:#888;font-size:13px;">(Merck Pharmaceutical, Taiwan Branch)</span></li>
+            <li>處長　賽諾菲安萬特大藥廠 <span style="color:#888;font-size:13px;">(Sanofi-Aventis, Taiwan Branch)</span></li>
+            <li>行銷經理　美商默沙東大藥廠 <span style="color:#888;font-size:13px;">(MSD Pharmaceutical, Taiwan Branch)</span></li>
+            <li>產品經理　美商輝瑞大藥廠 <span style="color:#888;font-size:13px;">(Pfizer Pharmaceutical, Taiwan Branch)</span></li>
+            <li>地區經理　美商史克大藥廠 <span style="color:#888;font-size:13px;">(SB Pharmaceutical, Taiwan Branch)</span></li>
+          </ul>
+        </div>
+        <div class="resume-box" style="margin-top:16px;">
+          <h4>專長領域</h4>
+          <ul>
+            <li>銷售技巧與業務管理</li>
+            <li>中階主管之教導能力與咨詢技巧</li>
+            <li>提問能力與強化團隊領導</li>
           </ul>
         </div>
       </div>
@@ -182,18 +308,19 @@
   </div>
 </section>
 
-<div class="divider-banner">
+<div class="divider-banner fade-up">
   <p>針對不同職涯階段，提供精準的職能升級方案</p>
+  <div class="sub">From Sales to Leadership — we grow with you.</div>
 </div>
 
 <section id="courses">
   <div class="container">
-    <div class="section-title">
+    <div class="section-title fade-up">
       <div class="en">Our Programs</div>
       <h2>專業課程介紹</h2>
     </div>
     <div class="course-grid">
-      <div class="course-card">
+      <div class="course-card fade-up delay-1">
         <span class="course-tag">初階</span>
         <h3>業務同仁：精準打擊與核心戰技</h3>
         <p>奠定紮實的醫藥銷售基本功，強化對客戶需求的敏銳度，確保業績穩健產出。</p>
@@ -204,7 +331,7 @@
           <li>客情建立與深耕實務</li>
         </ul>
       </div>
-      <div class="course-card">
+      <div class="course-card fade-up delay-2">
         <span class="course-tag">中階</span>
         <h3>業務經理與產品經理：策略思維與市場操盤</h3>
         <p>培養從「點」到「面」的宏觀佈局能力，提升產品策略的精準度與團隊執行力。</p>
@@ -215,7 +342,7 @@
           <li>跨部門溝通與專案管理效能</li>
         </ul>
       </div>
-      <div class="course-card">
+      <div class="course-card fade-up delay-3">
         <span class="course-tag">高階</span>
         <h3>經理人：領導統御與決策突圍</h3>
         <p>聚焦於組織長遠發展、企業文化建立與市場資源極大化。</p>
@@ -232,34 +359,108 @@
 
 <section id="contact">
   <div class="container">
-    <div class="section-title">
+    <div class="section-title fade-up">
       <div class="en">Get In Touch</div>
       <h2>聯絡資訊</h2>
     </div>
     <div class="contact-grid">
-      <div class="contact-info">
+      <div class="contact-info fade-up delay-1">
         <p>歡迎與我們聯繫，量身打造專屬於您團隊的企業內訓計畫。</p>
+
         <div class="info-item">
-          <div class="info-label">公司名稱</div>
-          <div class="info-value">豐簷</div>
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <div class="info-text">
+            <div class="info-label">公司名稱</div>
+            <div class="info-value">豐簷</div>
+          </div>
         </div>
+
         <div class="info-item">
-          <div class="info-label">聯絡信箱</div>
-          <div class="info-value placeholder-text">（請填入官方信箱）</div>
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="info-text">
+            <div class="info-label">聯絡信箱</div>
+            <div class="info-value"><a href="mailto:db1727@yahoo.com.tw" style="color:inherit;">db1727@yahoo.com.tw</a></div>
+          </div>
         </div>
+
         <div class="info-item">
-          <div class="info-label">聯絡電話</div>
-          <div class="info-value placeholder-text">（請填入連絡電話）</div>
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.68A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+          </div>
+          <div class="info-text">
+            <div class="info-label">聯絡電話</div>
+            <div class="info-value">02-29970186　行動：0932-144-192</div>
+          </div>
         </div>
+
         <div class="info-item">
-          <div class="info-label">公司地址</div>
-          <div class="info-value placeholder-text">（請填入立擎實業完整登記地址）</div>
+          <div class="info-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div class="info-text">
+            <div class="info-label">公司地址</div>
+            <div class="info-value">242 新北市新莊區中華路二段13號6樓</div>
+          </div>
+        </div>
+
+        <div class="map-embed">
+          <iframe
+            src="https://maps.google.com/maps?q=新北市新莊區中華路二段13號6樓&output=embed&hl=zh-TW"
+            width="100%" height="240" style="border:0;border-radius:8px;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" title="豐簷公司地址地圖">
+          </iframe>
         </div>
       </div>
-      <div class="map-wrap">
-        <div class="map-placeholder">
-          [Google Map 互動地圖位置]<br><br>
-          （提供地址後即可嵌入地圖）
+
+      <div class="contact-form-wrap fade-up delay-2">
+        <div class="contact-form" id="contact-form-box">
+          <h3>發送諮詢訊息</h3>
+          <form id="inquiry-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="f-name">姓名 *</label>
+                <input type="text" id="f-name" placeholder="王小明" required>
+              </div>
+              <div class="form-group">
+                <label for="f-company">公司 / 單位</label>
+                <input type="text" id="f-company" placeholder="貴公司名稱">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="f-email">電子信箱 *</label>
+                <input type="email" id="f-email" placeholder="you@company.com" required>
+              </div>
+              <div class="form-group">
+                <label for="f-phone">聯絡電話</label>
+                <input type="tel" id="f-phone" placeholder="0912-345-678">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="f-course">感興趣的課程</label>
+              <select id="f-course">
+                <option value="">— 請選擇 —</option>
+                <option>初階：業務同仁核心戰技</option>
+                <option>中階：策略思維與市場操盤</option>
+                <option>高階：領導統御與決策突圍</option>
+                <option>企業客製化內訓方案</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="f-msg">訊息內容 *</label>
+              <textarea id="f-msg" placeholder="請描述貴團隊的培訓需求或任何問題……" required></textarea>
+            </div>
+            <button type="submit" class="form-submit">送出諮詢</button>
+          </form>
+          <div class="form-success" id="form-success">
+            <div class="check">✓</div>
+            <p style="font-weight:700;font-size:17px;margin-bottom:8px;">感謝您的來訊！</p>
+            <p style="color:#5a5f68;font-size:14px;">我們將盡快與您聯繫。</p>
+          </div>
         </div>
       </div>
     </div>
@@ -267,8 +468,88 @@
 </section>
 
 <footer>
-  © 2026 豐簷 Fengyen. All Rights Reserved.
+  <div class="footer-logo">豐簷 FENGYEN</div>
+  <div class="footer-links">
+    <a href="#about">關於豐簷</a>
+    <a href="#courses">專業課程</a>
+    <a href="#contact">聯絡我們</a>
+  </div>
+  <div class="copy">© 2026 豐簷 Fengyen. All Rights Reserved.</div>
 </footer>
 
+<button class="back-top" id="back-top" aria-label="回到頂部">
+  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
+<script>
+  /* ── Hamburger ── */
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileNav.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-link').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    });
+  });
+
+  /* ── Header scroll shadow ── */
+  const header = document.getElementById('site-header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 10);
+  }, {passive:true});
+
+  /* ── Active nav on scroll ── */
+  const sections = ['about','courses','contact'];
+  const navLinks = document.querySelectorAll('#desktop-nav a');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        navLinks.forEach(a => a.classList.toggle('active', a.dataset.section === id));
+      }
+    });
+  }, {rootMargin:'-40% 0px -55% 0px'});
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+
+  /* ── Fade-up on scroll ── */
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const fadeObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        fadeObserver.unobserve(e.target);
+      }
+    });
+  }, {threshold:0.12});
+  fadeEls.forEach(el => fadeObserver.observe(el));
+
+  /* ── Back to top ── */
+  const backTop = document.getElementById('back-top');
+  window.addEventListener('scroll', () => {
+    backTop.classList.toggle('show', window.scrollY > 400);
+  }, {passive:true});
+  backTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+  /* ── Contact form (simulated submit) ── */
+  document.getElementById('inquiry-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('f-name').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const msg = document.getElementById('f-msg').value.trim();
+    if (!name || !email || !msg) {
+      alert('請填寫姓名、電子信箱及訊息內容。');
+      return;
+    }
+    this.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  });
+</script>
 </body>
 </html>
