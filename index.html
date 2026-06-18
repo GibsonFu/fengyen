@@ -165,6 +165,15 @@
   .course-card h4{font-size:13px;color:var(--gold);letter-spacing:1px;margin-bottom:10px;}
   .course-card ul{padding-left:18px;color:#4a4f57;font-size:14px;}
   .course-card li{margin-bottom:8px;}
+  .course-more{
+    display:inline-flex;align-items:center;gap:6px;margin-top:20px;
+    background:var(--navy);color:#fff;padding:9px 20px;border-radius:4px;
+    font-size:13px;font-weight:700;letter-spacing:1px;
+    transition:background .2s,transform .2s;
+  }
+  .course-more svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s;}
+  .course-more:hover{background:var(--gold);color:var(--navy-dark);}
+  .course-more:hover svg{stroke:var(--navy-dark);transform:translateX(3px);}
 
   /* ── Contact ── */
   #contact{background:var(--gray-bg);}
@@ -352,6 +361,7 @@
           <li>目標市場與 Territory 管理</li>
           <li>客情建立與深耕實務</li>
         </ul>
+        <a href="courses-junior.html" class="course-more">更多精彩課程 <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
       </div>
       <div class="course-card fade-up delay-2">
         <span class="course-tag">中階</span>
@@ -363,6 +373,7 @@
           <li>競品分析與產品精準定位</li>
           <li>跨部門溝通與專案管理效能</li>
         </ul>
+        <a href="courses-mid.html" class="course-more">更多精彩課程 <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
       </div>
       <div class="course-card fade-up delay-3">
         <span class="course-tag">高階</span>
@@ -374,6 +385,7 @@
           <li>商業敏銳度與企業營運指標分析</li>
           <li>高效團隊建立與教練式引導</li>
         </ul>
+        <a href="courses-senior.html" class="course-more">更多精彩課程 <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
       </div>
     </div>
   </div>
