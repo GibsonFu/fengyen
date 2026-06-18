@@ -125,34 +125,170 @@
   .section-title h2{font-size:30px;color:var(--navy);font-weight:700;letter-spacing:1px;}
   .section-title .en{font-size:13px;color:var(--gold);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px;}
 
-  /* ── About ── */
-  #about{background:var(--gray-bg);}
-  .about-grid{display:flex;gap:60px;align-items:flex-start;flex-wrap:wrap;}
-  .about-text{flex:1.3;min-width:300px;}
-  .about-text h3{color:var(--navy);font-size:20px;margin-bottom:14px;}
-  .about-text p{margin-bottom:28px;color:#4a4f57;}
-  .quote-box{
-    background:#fff;border-left:4px solid var(--gold);padding:22px 26px;
-    font-size:16px;color:var(--navy);font-style:italic;margin-bottom:28px;
-    box-shadow:0 2px 12px rgba(0,0,0,0.05);border-radius:0 6px 6px 0;
-  }
-  .about-photo{flex:1;min-width:280px;text-align:center;}
-  .photo-placeholder{
-    background:#dfe3e8;border:2px dashed #b7bdc6;border-radius:8px;
-    height:340px;display:flex;align-items:center;justify-content:center;
-    color:#7a818c;font-size:14px;text-align:center;padding:20px;
-  }
-  .founder-name{margin-top:18px;font-size:18px;font-weight:700;color:var(--navy);}
-  .founder-title{font-size:14px;color:#7a818c;margin-top:4px;}
-  .resume-box{background:#fff;border-radius:8px;padding:24px 28px;margin-top:36px;box-shadow:0 2px 10px rgba(0,0,0,0.06);}
-  .resume-box h4{color:var(--navy);margin-bottom:14px;font-size:16px;}
-  .resume-box ul{padding-left:20px;color:#4a4f57;}
-  .resume-box li{margin-bottom:8px;}
+  /* ══ About — full redesign ══ */
 
-  /* ── Divider banner ── */
+  /* Block 1: Founder (light bg) */
+  #about{padding:0;background:none;}
+  .about-founder{
+    background:#fff;
+    padding:100px 0 80px;position:relative;overflow:hidden;
+  }
+  .about-founder::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:4px;
+    background:linear-gradient(90deg,var(--navy),var(--gold),var(--navy));
+    pointer-events:none;
+  }
+  .founder-grid{display:flex;gap:56px;align-items:flex-start;flex-wrap:wrap;}
+  /* Photo column */
+  .founder-photo-col{flex:0 0 280px;display:flex;flex-direction:column;gap:20px;}
+  .founder-img-frame{
+    position:relative;border-radius:16px;overflow:hidden;
+    box-shadow:0 12px 40px rgba(13,43,78,0.15);
+  }
+  .founder-img-frame img{width:100%;display:block;}
+  .founder-img-frame::after{
+    content:'';position:absolute;inset:0;
+    border-radius:16px;border:2px solid rgba(201,164,92,0.4);pointer-events:none;
+  }
+  .founder-id{
+    background:var(--gray-bg);
+    border:1px solid #e8eaed;
+    border-radius:14px;padding:20px 22px;text-align:center;
+  }
+  .founder-id-name{color:var(--navy);font-size:20px;font-weight:700;letter-spacing:2px;}
+  .founder-id-title{color:var(--gold);font-size:13px;letter-spacing:1.5px;margin-top:4px;}
+  /* Stats row */
+  .founder-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+  .stat-glass{
+    background:#fff;
+    border:1.5px solid #e8eaed;
+    border-radius:12px;padding:16px 10px;text-align:center;
+    box-shadow:0 2px 12px rgba(0,0,0,0.05);
+  }
+  .stat-glass-num{color:var(--gold);font-size:26px;font-weight:700;line-height:1;}
+  .stat-glass-label{color:#7a7f88;font-size:11px;margin-top:5px;letter-spacing:.5px;}
+  /* Right column */
+  .founder-info-col{flex:1;min-width:280px;}
+  .about-en-label{font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:10px;opacity:.8;}
+  .founder-info-col h2{color:var(--navy);font-size:28px;font-weight:700;margin-bottom:24px;letter-spacing:1px;}
+  /* Section label */
+  .glass-label{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:12px;
+  }
+  .glass-label::before{content:'';width:18px;height:2px;background:var(--gold);}
+  /* Info card */
+  .glass-card{
+    background:var(--gray-bg);
+    border:1.5px solid #e8eaed;
+    border-radius:14px;padding:22px 24px;margin-bottom:16px;
+  }
+  .glass-card ul{list-style:none;padding:0;}
+  .glass-card li{
+    color:#4a4f57;font-size:14px;padding:7px 0;
+    border-bottom:1px solid #eef0f3;display:flex;align-items:flex-start;gap:10px;
+  }
+  .glass-card li:last-child{border-bottom:none;padding-bottom:0;}
+  .glass-card li::before{content:'›';color:var(--gold);font-size:16px;flex-shrink:0;margin-top:-1px;}
+  .glass-card li em{color:#9ea3ab;font-style:normal;font-size:12px;margin-left:4px;}
+  .glass-card li strong{color:var(--navy);}
+  /* Specialty pills */
+  .spec-pills{display:flex;flex-wrap:wrap;gap:8px;}
+  .spec-pill{
+    background:rgba(201,164,92,0.1);border:1.5px solid rgba(201,164,92,0.35);
+    border-radius:20px;padding:6px 16px;font-size:13px;color:var(--navy);font-weight:500;
+  }
+
+  /* Block 2: Mission (light) */
+  .about-mission{background:#fff;padding:90px 0;}
+  .mission-grid{display:flex;gap:60px;align-items:stretch;flex-wrap:wrap;}
+  .mission-left{flex:1;min-width:280px;}
+  .mission-section-label{font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:12px;}
+  .mission-left h2{color:var(--navy);font-size:26px;font-weight:700;margin-bottom:20px;line-height:1.4;}
+  .mission-left p{color:#4a4f57;line-height:1.9;font-size:15px;}
+  .mission-right{flex:1;min-width:280px;display:flex;align-items:center;}
+  .quote-glass{
+    background:linear-gradient(135deg,var(--navy) 0%,#1a3d6e 100%);
+    border-radius:16px;padding:36px 32px;position:relative;overflow:hidden;
+    box-shadow:0 12px 40px rgba(13,43,78,0.2);
+  }
+  .quote-glass::before{
+    content:'"';position:absolute;top:-10px;left:16px;
+    font-size:120px;color:rgba(201,164,92,0.12);font-family:Georgia,serif;line-height:1;
+  }
+  .quote-glass p{color:rgba(255,255,255,0.9);font-size:15px;line-height:1.9;font-style:italic;position:relative;z-index:1;}
+  .quote-glass-sig{margin-top:20px;color:var(--gold);font-size:13px;font-weight:700;letter-spacing:1px;position:relative;z-index:1;}
+
+  /* Block 3: Career (light) */
+  .about-career{background:var(--gray-bg);padding:90px 0;}
+  .career-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .career-item{
+    background:#fff;border:1.5px solid #e8eaed;
+    border-radius:12px;padding:20px 22px;
+    border-left:3px solid var(--gold);
+    box-shadow:0 2px 10px rgba(0,0,0,0.04);
+    transition:box-shadow .25s,transform .25s;
+  }
+  .career-item:hover{box-shadow:0 6px 24px rgba(201,164,92,0.15);transform:translateX(4px);}
+  .career-role{color:var(--navy);font-size:15px;font-weight:700;}
+  .career-company{color:var(--gold);font-size:13px;margin-top:4px;}
+  .career-en{color:#9ea3ab;font-size:11px;margin-top:3px;}
+  .career-highlight{
+    grid-column:1/-1;background:#fff;
+    border:1.5px solid rgba(201,164,92,0.4);border-left:3px solid var(--gold);
+    border-radius:12px;padding:20px 24px;
+  }
+  .career-highlight p{color:#4a4f57;font-size:14px;}
+  .career-highlight strong{color:var(--navy);}
+
+  /* Block 4: Education + Honors (light) */
+  .about-edu{background:var(--gray-bg);padding:80px 0;}
+  .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+  .edu-card{background:#fff;border-radius:14px;padding:28px 26px;box-shadow:0 4px 20px rgba(0,0,0,0.06);}
+  .edu-card-icon{width:42px;height:42px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;}
+  .edu-card-icon svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .edu-card h3{color:var(--navy);font-size:16px;font-weight:700;margin-bottom:14px;}
+  .edu-card ul{list-style:none;padding:0;}
+  .edu-card li{font-size:14px;color:#4a4f57;padding:8px 0;border-bottom:1px solid #f0f2f5;display:flex;gap:8px;align-items:flex-start;}
+  .edu-card li:last-child{border-bottom:none;}
+  .edu-card li::before{content:'✦';color:var(--gold);font-size:10px;flex-shrink:0;margin-top:4px;}
+
+  /* Block 5: Lecture records (light) */
+  .about-lectures{background:#fff;padding:80px 0;}
+  .lec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin-top:40px;}
+  .lec-group{
+    background:var(--gray-bg);border:1.5px solid #e8eaed;
+    border-radius:14px;padding:22px 20px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.04);
+  }
+  .lec-group-title{
+    font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+    color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px;
+  }
+  .lec-group-title::before{content:'';width:14px;height:2px;background:var(--gold);}
+  .lec-tags{display:flex;flex-wrap:wrap;gap:7px;}
+  .lec-tag{
+    background:#fff;border:1.5px solid #dde1e7;
+    border-radius:16px;padding:4px 12px;font-size:12px;color:#4a4f57;
+    transition:background .2s,border-color .2s,color .2s;
+  }
+  .lec-tag:hover{background:rgba(201,164,92,0.08);border-color:rgba(201,164,92,0.45);color:var(--navy);}
+
+  /* Divider banner */
   .divider-banner{background:var(--navy);color:#fff;text-align:center;padding:50px 20px;}
   .divider-banner p{font-size:22px;font-weight:700;letter-spacing:1px;}
   .divider-banner .sub{font-size:14px;color:rgba(255,255,255,0.6);margin-top:10px;font-weight:400;letter-spacing:.5px;}
+
+  /* section-title dark variant */
+  .section-title-dark .en{color:var(--gold);}
+  .section-title-dark h2{color:#fff;}
+
+  @media(max-width:768px){
+    .founder-grid,.mission-grid,.career-grid,.edu-grid{grid-template-columns:1fr;flex-direction:column;}
+    .founder-photo-col{flex:none;width:100%;}
+    .career-highlight{grid-column:1;}
+  }
 
   /* ── Courses ── */
   .course-grid{display:flex;gap:28px;flex-wrap:wrap;}
@@ -284,47 +420,170 @@
 </section>
 
 <section id="about">
-  <div class="container">
-    <div class="section-title fade-up">
-      <div class="en">About Fengyen</div>
-      <h2>關於豐簷</h2>
-    </div>
-    <div class="about-grid">
-      <div class="about-photo fade-up">
-        <img src="鄭傳吉老師專業形象照.png" alt="鄭傳吉老師專業形象照" style="width:100%;max-width:320px;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.12);margin:0 auto;">
-        <div class="founder-name">鄭傳吉 老師</div>
-        <div class="founder-title">豐簷創辦人</div>
-        <div class="resume-box" style="margin-top:24px;text-align:left;">
-          <h4>專長領域</h4>
-          <ul>
-            <li>銷售技巧與業務管理</li>
-            <li>中階主管之教導能力與咨詢技巧</li>
-            <li>提問能力與強化團隊領導</li>
-          </ul>
+
+  <!-- ① Mission + Quote -->
+  <div class="about-mission">
+    <div class="container">
+      <div class="mission-grid">
+        <div class="mission-left fade-up">
+          <div class="mission-section-label">Our Mission</div>
+          <h2>創立宗旨</h2>
+          <p>在瞬息萬變的醫藥行銷領域中，風簷卓越企管始終堅守培育與傳承的核心信念。我們深知，企業最核心的競爭力來自於人才的底蘊。因此，我們將推動市場進入與業績成長的戰略思維，融入業界實戰導師引路與陪伴的精神，為醫藥企業建構一套扎根基層、放眼未來的培訓藍圖。透過高度符合產業特性的專業模式，我們將多年的實戰精華，轉譯為「絕對可落地執行」的賦能課程。風簷卓越企管致力於厚植企業內部人才的專業實力，讓成功經驗不再只是口耳相傳，而是化作源源不絕的成長動能，與企業攜手共創長遠的卓越價值。</p>
+        </div>
+        <div class="mission-right fade-up delay-1">
+          <div class="quote-glass">
+            <p>「我們常常在講人才培育，但培訓的最終目的，絕對不是只讓大家在課堂上學會一套方法而已，而是要看這些方法能不能在真實的市場裡發揮作用。真正的專業，是能夠幫助同仁把行銷的思維、業務的技巧，轉化成每天在市場上能真正派上用場的武器。當我們透過專業的培訓，讓大家不只『知道』，還能確實『做到』，同仁在實戰中拿到了成果，『人』的價值自然就會被無限放大。」</p>
+            <div class="quote-glass-sig">— 鄭傳吉　創辦人</div>
+          </div>
         </div>
       </div>
-      <div class="about-text fade-up delay-1">
-        <h3>創立宗旨</h3>
-        <p>在瞬息萬變的醫藥行銷領域中，風簷卓越企管始終堅守培育與傳承的核心信念。我們深知，企業最核心的競爭力來自於人才的底蘊。因此，我們將推動市場進入與業績成長的戰略思維，融入業界實戰導師引路與陪伴的精神，為醫藥企業建構一套扎根基層、放眼未來的培訓藍圖。透過高度符合產業特性的專業模式，我們將多年的實戰精華，轉譯為「絕對可落地執行」的賦能課程。風簷卓越企管致力於厚植企業內部人才的專業實力，讓成功經驗不再只是口耳相傳，而是化作源源不絕的成長動能，與企業攜手共創長遠的卓越價值。</p>
-        <h3>創辦人的話</h3>
-        <div class="quote-box">
-          「我們常常在講人才培育，但培訓的最終目的，絕對不是只讓大家在課堂上學會一套方法而已，而是要看這些方法能不能在真實的市場裡發揮作用。真正的專業，是能夠幫助同仁把行銷的思維、業務的技巧，轉化成每天在市場上能真正派上用場的武器。當我們透過專業的培訓，讓大家不只『知道』，還能確實『做到』，同仁在實戰中拿到了成果，『人』的價值自然就會被無限放大。」
+    </div>
+  </div>
+
+  <!-- ② Founder Profile -->
+  <div class="about-founder">
+    <div class="container">
+      <div class="founder-grid">
+        <!-- Photo column -->
+        <div class="founder-photo-col fade-up">
+          <div class="founder-img-frame">
+            <img src="鄭傳吉老師專業形象照.png" alt="鄭傳吉老師專業形象照">
+          </div>
+          <div class="founder-id">
+            <div class="founder-id-name">鄭傳吉 老師</div>
+            <div class="founder-id-title">風簷卓越企管　創辦人</div>
+          </div>
+          <div class="founder-stats">
+            <div class="stat-glass"><div class="stat-glass-num">28</div><div class="stat-glass-label">年藥界資歷</div></div>
+            <div class="stat-glass"><div class="stat-glass-num">MBA</div><div class="stat-glass-label">美國企管碩士</div></div>
+            <div class="stat-glass"><div class="stat-glass-num">40+</div><div class="stat-glass-label">授課企業</div></div>
+          </div>
         </div>
-        <div class="resume-box">
-          <h4>歷任要職</h4>
+
+        <!-- Info column -->
+        <div class="founder-info-col fade-up delay-1">
+          <div class="about-en-label">About the Founder</div>
+          <h2>深耕藥界 28 年的實戰導師</h2>
+
+          <div class="glass-label">歷任要職</div>
+          <div class="glass-card" style="margin-bottom:16px;">
+            <ul>
+              <li>在藥界服務逾 <strong>28 年</strong>，歷經業務銷售、行銷規劃及各項高階主管職務</li>
+              <li>總經理　美商邁蘭大藥廠台灣子公司 <em>(Mylan Pharmaceutical)</em></li>
+              <li>總經理　立擎實業股份有限公司 <em>（現任）</em></li>
+              <li>處長　德國默克大藥廠 <em>(Merck Pharmaceutical)</em></li>
+              <li>處長　賽諾菲安萬特大藥廠 <em>(Sanofi-Aventis)</em></li>
+              <li>行銷經理　美商默沙東大藥廠 <em>(MSD Pharmaceutical)</em></li>
+              <li>產品經理　美商輝瑞大藥廠 <em>(Pfizer Pharmaceutical)</em></li>
+              <li>地區經理　美商史克大藥廠 <em>(SB Pharmaceutical)</em></li>
+            </ul>
+          </div>
+
+          <div class="glass-label">專長領域</div>
+          <div class="spec-pills">
+            <span class="spec-pill">銷售技巧與業務管理</span>
+            <span class="spec-pill">中階主管教導與咨詢</span>
+            <span class="spec-pill">提問能力與團隊領導</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edu + Honors cards -->
+      <div class="edu-grid fade-up" style="margin-top:48px;">
+        <div class="edu-card">
+          <div class="edu-card-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3.33 1.67 8.67 1.67 12 0v-5"/></svg>
+          </div>
+          <h3>學術背景</h3>
           <ul>
-            <li>總經理　立擎實業有限公司 <span style="color:#888;font-size:13px;">(LEGENE ENTERPRISE CO., LTD.)</span></li>
-            <li>總經理　美國邁蘭大藥廠 <span style="color:#888;font-size:13px;">(Mylan Pharmaceutical, Taiwan Branch)</span></li>
-            <li>處長　德國默克大藥廠 <span style="color:#888;font-size:13px;">(Merck Pharmaceutical, Taiwan Branch)</span></li>
-            <li>處長　賽諾菲安萬特大藥廠 <span style="color:#888;font-size:13px;">(Sanofi-Aventis, Taiwan Branch)</span></li>
-            <li>行銷經理　美商默沙東大藥廠 <span style="color:#888;font-size:13px;">(MSD Pharmaceutical, Taiwan Branch)</span></li>
-            <li>產品經理　美商輝瑞大藥廠 <span style="color:#888;font-size:13px;">(Pfizer Pharmaceutical, Taiwan Branch)</span></li>
-            <li>地區經理　美商史克大藥廠 <span style="color:#888;font-size:13px;">(SB Pharmaceutical, Taiwan Branch)</span></li>
+            <li>台北醫學大學 藥學系　學士 ／ 藥師</li>
+            <li>美國西德州農工大學　企業管理碩士 (MBA)</li>
+          </ul>
+        </div>
+        <div class="edu-card">
+          <div class="edu-card-icon">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3>社會參與與榮譽</h3>
+          <ul>
+            <li>台北市訓練經理人學會　理事長（2004–2005）</li>
+            <li>台灣藥品行銷暨管理學會　現任理事暨專任講師</li>
+            <li>2016 年度 TPMMA 藥業傑出高階經理人 — 人資訓練類</li>
           </ul>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- ④ Lecture Records -->
+  <div class="about-lectures">
+    <div class="container">
+      <div class="section-title fade-up" style="margin-bottom:0;">
+        <div class="en">Lecture History</div>
+        <h2>授課企業暨機構</h2>
+      </div>
+      <div class="lec-grid">
+        <div class="lec-group fade-up">
+          <div class="lec-group-title">學會</div>
+          <div class="lec-tags">
+            <span class="lec-tag">TMA</span><span class="lec-tag">PMA</span>
+            <span class="lec-tag">TPMMA</span><span class="lec-tag">台灣臨床藥學會</span>
+          </div>
+        </div>
+        <div class="lec-group fade-up delay-1">
+          <div class="lec-group-title">醫療院所</div>
+          <div class="lec-tags">
+            <span class="lec-tag">高雄長庚醫院</span>
+          </div>
+        </div>
+        <div class="lec-group fade-up delay-2">
+          <div class="lec-group-title">學校</div>
+          <div class="lec-tags">
+            <span class="lec-tag">PRESTON University（美國 MBA）</span>
+            <span class="lec-tag">元智大學</span>
+            <span class="lec-tag">嘉藥—成大講座</span>
+            <span class="lec-tag">元培醫事科技大學</span>
+          </div>
+        </div>
+        <div class="lec-group fade-up delay-1">
+          <div class="lec-group-title">藥廠</div>
+          <div class="lec-tags">
+            <span class="lec-tag">日商大塚製藥</span><span class="lec-tag">台灣信東製藥</span>
+            <span class="lec-tag">台灣田邊製藥</span><span class="lec-tag">永信製藥</span>
+          </div>
+        </div>
+        <div class="lec-group fade-up delay-2" style="grid-column:span 2;">
+          <div class="lec-group-title">藥品暨生技公司</div>
+          <div class="lec-tags">
+            <span class="lec-tag">多田藥品</span><span class="lec-tag">弘旺藥品</span>
+            <span class="lec-tag">泰和碩藥品科技</span><span class="lec-tag">台灣諾和諾德</span>
+            <span class="lec-tag">永勝生醫</span><span class="lec-tag">惠德藥品</span>
+            <span class="lec-tag">台灣諾華藥品</span><span class="lec-tag">壽元國信藥品</span>
+            <span class="lec-tag">安美得生醫</span><span class="lec-tag">晟德大藥廠</span>
+            <span class="lec-tag">楊森藥廠</span><span class="lec-tag">吉泰藥品</span>
+            <span class="lec-tag">誠鼎企業</span><span class="lec-tag">百略生技</span>
+            <span class="lec-tag">佳生生技</span><span class="lec-tag">嬌生公司</span>
+            <span class="lec-tag">亞博實業</span><span class="lec-tag">美時大藥廠</span>
+            <span class="lec-tag">費森尤斯卡比</span><span class="lec-tag">龍生藥品</span>
+            <span class="lec-tag">綠十字藥品</span><span class="lec-tag">吉發公司</span>
+            <span class="lec-tag">施維雅藥廠</span><span class="lec-tag">培力藥廠</span>
+            <span class="lec-tag">輝凌藥品</span><span class="lec-tag">博賞醫藥</span>
+            <span class="lec-tag">友信行德國默克</span><span class="lec-tag">UCB 優時比藥廠</span>
+            <span class="lec-tag">久裕企業 Arich</span><span class="lec-tag">品德生醫</span>
+            <span class="lec-tag">壽元製藥</span><span class="lec-tag">權峰公司</span>
+          </div>
+        </div>
+        <div class="lec-group fade-up">
+          <div class="lec-group-title">其他產業</div>
+          <div class="lec-tags">
+            <span class="lec-tag">瑞士 ABB 光電</span>
+            <span class="lec-tag">Ollio 精品服飾</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
 <div class="divider-banner fade-up">
