@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>初階課程 — 風簷卓越企管</title>
+<style>
+  :root{--navy:#0d2b4e;--navy-dark:#081b33;--gold:#c9a45c;--gold-light:#e0bd7c;--gray-bg:#f5f6f8;--text:#2b2f36;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;color:var(--text);line-height:1.8;background:#fff;}
+  a{text-decoration:none;color:inherit;}
+
+  /* Header */
+  header{position:fixed;top:0;left:0;right:0;background:rgba(13,43,78,0.97);z-index:100;backdrop-filter:blur(6px);box-shadow:0 2px 20px rgba(0,0,0,0.3);}
+  header .container{display:flex;justify-content:space-between;align-items:center;height:64px;max-width:1100px;margin:0 auto;padding:0 24px;}
+  .logo-wrap{display:flex;align-items:center;gap:14px;}
+  .logo-icon-box{width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid rgba(201,164,92,0.6);background:#fff;display:flex;align-items:flex-start;justify-content:center;}
+  .logo-icon-box img{width:100%;height:auto;display:block;}
+  .logo-text{display:flex;flex-direction:column;line-height:1.3;}
+  .logo-text-main{color:var(--gold);font-size:17px;font-weight:700;letter-spacing:2px;white-space:nowrap;}
+  .logo-text-sub{color:rgba(255,255,255,0.5);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;margin-top:2px;}
+  .back-btn{color:#e8e8e8;font-size:14px;display:flex;align-items:center;gap:6px;transition:color .2s;}
+  .back-btn:hover{color:var(--gold);}
+  .back-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+
+  /* Hero */
+  .page-hero{background:linear-gradient(135deg,var(--navy-dark),var(--navy));padding:120px 24px 60px;text-align:center;color:#fff;}
+  .page-hero .badge{display:inline-block;background:var(--gold);color:var(--navy-dark);font-size:12px;font-weight:700;padding:5px 16px;border-radius:20px;letter-spacing:2px;margin-bottom:20px;}
+  .page-hero h1{font-size:32px;font-weight:700;letter-spacing:1px;margin-bottom:12px;}
+  .page-hero p{color:rgba(255,255,255,0.7);font-size:15px;max-width:600px;margin:0 auto;}
+  .stats{display:flex;gap:40px;justify-content:center;margin-top:36px;flex-wrap:wrap;}
+  .stat{text-align:center;}
+  .stat-num{font-size:36px;font-weight:700;color:var(--gold);}
+  .stat-label{font-size:13px;color:rgba(255,255,255,0.6);margin-top:2px;}
+
+  /* Content */
+  .content{max-width:1000px;margin:0 auto;padding:60px 24px 80px;}
+
+  /* Category */
+  .category{margin-bottom:60px;}
+  .category-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:16px;border-bottom:2px solid var(--gold);}
+  .category-icon{width:44px;height:44px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .category-icon svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .category-header h2{font-size:20px;color:var(--navy);font-weight:700;}
+  .category-header span{font-size:13px;color:var(--gold);letter-spacing:1px;}
+
+  /* Course grid */
+  .course-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+  .course-item{background:#fff;border:1.5px solid #e8eaed;border-radius:10px;padding:20px 22px;transition:border-color .2s,box-shadow .2s,transform .2s;position:relative;}
+  .course-item:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(201,164,92,0.15);transform:translateY(-3px);}
+  .course-num{position:absolute;top:16px;right:16px;width:26px;height:26px;background:var(--gray-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--navy);}
+  .course-item h3{font-size:15px;color:var(--navy);font-weight:700;margin-bottom:8px;padding-right:32px;line-height:1.4;}
+  .course-item p{font-size:13px;color:#5a5f68;line-height:1.6;}
+
+  footer{background:var(--navy-dark);color:#aeb8c4;text-align:center;padding:28px 20px;font-size:13px;}
+  .footer-links{margin-bottom:10px;}
+  .footer-links a{color:#aeb8c4;margin:0 12px;transition:color .2s;}
+  .footer-links a:hover{color:var(--gold);}
+
+  @media(max-width:768px){
+    .page-hero h1{font-size:24px;}
+    .course-list{grid-template-columns:1fr;}
+    .stats{gap:24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-icon-box"><img src="logo.png" alt="風簷卓越企管"></div>
+      <div class="logo-text">
+        <span class="logo-text-main">風簷卓越企管</span>
+        <span class="logo-text-sub">Feng Yan Excellence Consulting</span>
+      </div>
+    </a>
+    <a href="index.html#courses" class="back-btn">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      返回課程總覽
+    </a>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="badge">初　階</div>
+  <h1>基層醫藥代表與新進同仁</h1>
+  <p>奠定基礎、落實執行 — 從銷售基本功到區域管理，全面建構醫藥代表的核心戰力</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">20</div><div class="stat-label">精選堂課</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">學習主軸</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">實戰應用</div></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- 一、Selling Skill -->
+  <div class="category">
+    <div class="category-header">
+      <div class="category-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div>
+        <div>一、Selling Skill</div>
+        <h2>銷售實務技巧</h2>
+      </div>
+    </div>
+    <div class="course-list">
+      <div class="course-item">
+        <div class="course-num">01</div>
+        <h3>主動式銷售技巧 (ASSW)</h3>
+        <p>掌握暖場、提問、說理到共鳴，將醫師隱憂導向自家產品方案。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">02</div>
+        <h3>醫藥代表破冰與敲門實務</h3>
+        <p>克服陌生拜訪恐懼，建立醫療院所第一印象的實戰話術。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">03</div>
+        <h3>診間極短篇：黃金60秒電梯簡報</h3>
+        <p>在極度限縮的時間內，精準打出產品核心亮點。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">04</div>
+        <h3>產品訊息傳遞與FAB演練</h3>
+        <p>熟練轉換產品特色 (Feature)、優勢 (Advantage) 與臨床利益 (Benefit)。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">05</div>
+        <h3>基礎反對問題處理</h3>
+        <p>辨識醫師拒絕背後的真實原因，並運用標準話術化解疑慮。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 二、People Skill -->
+  <div class="category">
+    <div class="category-header">
+      <div class="category-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div>
+        <div>二、People Skill</div>
+        <h2>人際與溝通技巧</h2>
+      </div>
+    </div>
+    <div class="course-list">
+      <div class="course-item">
+        <div class="course-num">06</div>
+        <h3>專業簡報與實例教導 (PSIP)</h3>
+        <p>針對小型說明會 (In-service) 的投影片製作與演說技巧。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">07</div>
+        <h3>DISC 職場性格與醫師溝通解析</h3>
+        <p>運用 DISC 快速辨識客戶性格，調整溝通頻率與應對風格。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">08</div>
+        <h3>醫療專業禮儀與應對進退</h3>
+        <p>從診間禮貌、服裝儀容到跟診規矩，建立無懈可擊的專業形象。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">09</div>
+        <h3>同理心傾聽技巧</h3>
+        <p>學習聽出客戶弦外之音，建立具備溫度的長期醫病關係。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">10</div>
+        <h3>跨部門溝通基礎</h3>
+        <p>學習與行銷部 (PM)、醫學部 (Medical) 高效協作的溝通心法。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 三、Territory Management -->
+  <div class="category">
+    <div class="category-header">
+      <div class="category-icon">
+        <svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+      </div>
+      <div>
+        <div>三、Territory Management</div>
+        <h2>區域營運管理</h2>
+      </div>
+    </div>
+    <div class="course-list">
+      <div class="course-item">
+        <div class="course-num">11</div>
+        <h3>醫藥區域管理基礎</h3>
+        <p>盤點轄區資源，制定有邏輯的季度巡迴拜訪計畫。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">12</div>
+        <h3>目標設定與 PDCA 循環實務</h3>
+        <p>將業績目標拆解，並透過 Plan-Do-Check-Act 持續修正行動。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">13</div>
+        <h3>日常拜訪路線最佳化</h3>
+        <p>時間與成本管理，確保將最多的精力投資在最高潛力的客戶上。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">14</div>
+        <h3>基礎診所與醫院客戶分級 (Targeting)</h3>
+        <p>建立科學化的 A/B/C 級客戶分類，精準投放資源。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">15</div>
+        <h3>銷售報表實務與數據紀錄</h3>
+        <p>落實日常活動紀錄，確保市場資訊透明且可追蹤。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 四、Mindset & Knowledge -->
+  <div class="category">
+    <div class="category-header">
+      <div class="category-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      </div>
+      <div>
+        <div>四、Mindset &amp; Knowledge</div>
+        <h2>心態與產業知識</h2>
+      </div>
+    </div>
+    <div class="course-list">
+      <div class="course-item">
+        <div class="course-num">16</div>
+        <h3>醫藥產業法規與 IRPMA 規範</h3>
+        <p>熟悉行銷紅線，確保所有推廣活動符合業界最高合規標準。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">17</div>
+        <h3>大道至簡：銷售人員的心態與抗壓</h3>
+        <p>回歸業務本質，建立化繁為簡的工作習慣與挫折復原力。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">18</div>
+        <h3>基礎臨床文獻解讀</h3>
+        <p>掌握 Paper 閱讀邏輯，能自信地向醫師傳遞臨床數據背後的意義。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">19</div>
+        <h3>健保制度與醫療體系運作基礎</h3>
+        <p>了解台灣健保給付架構，掌握醫療院所的利益結構。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">20</div>
+        <h3>導師制度 (Mentor-Mentee) 新人指南</h3>
+        <p>引導新進同仁如何向資深前輩汲取實戰經驗。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">回首頁</a>
+    <a href="courses-mid.html">中階課程</a>
+    <a href="courses-senior.html">高階課程</a>
+  </div>
+  © 2026 風簷卓越企管 Feng Yan Excellence Consulting. All Rights Reserved.
+</footer>
+
+</body>
+</html>

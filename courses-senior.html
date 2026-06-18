@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>高階課程 — 風簷卓越企管</title>
+<style>
+  :root{--navy:#0d2b4e;--navy-dark:#081b33;--gold:#c9a45c;--gold-light:#e0bd7c;--gray-bg:#f5f6f8;--text:#2b2f36;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;color:var(--text);line-height:1.8;background:#fff;}
+  a{text-decoration:none;color:inherit;}
+  header{position:fixed;top:0;left:0;right:0;background:rgba(13,43,78,0.97);z-index:100;backdrop-filter:blur(6px);box-shadow:0 2px 20px rgba(0,0,0,0.3);}
+  header .container{display:flex;justify-content:space-between;align-items:center;height:64px;max-width:1100px;margin:0 auto;padding:0 24px;}
+  .logo-wrap{display:flex;align-items:center;gap:14px;}
+  .logo-icon-box{width:46px;height:46px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid rgba(201,164,92,0.6);background:#fff;display:flex;align-items:flex-start;justify-content:center;}
+  .logo-icon-box img{width:100%;height:auto;display:block;}
+  .logo-text{display:flex;flex-direction:column;line-height:1.3;}
+  .logo-text-main{color:var(--gold);font-size:17px;font-weight:700;letter-spacing:2px;white-space:nowrap;}
+  .logo-text-sub{color:rgba(255,255,255,0.5);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;margin-top:2px;}
+  .back-btn{color:#e8e8e8;font-size:14px;display:flex;align-items:center;gap:6px;transition:color .2s;}
+  .back-btn:hover{color:var(--gold);}
+  .back-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+  .page-hero{background:linear-gradient(135deg,#060f1e,#0d2b4e);padding:120px 24px 60px;text-align:center;color:#fff;}
+  .page-hero .badge{display:inline-block;background:var(--gold);color:var(--navy-dark);font-size:12px;font-weight:700;padding:5px 16px;border-radius:20px;letter-spacing:2px;margin-bottom:20px;}
+  .page-hero h1{font-size:32px;font-weight:700;letter-spacing:1px;margin-bottom:12px;}
+  .page-hero p{color:rgba(255,255,255,0.7);font-size:15px;max-width:600px;margin:0 auto;}
+  .stats{display:flex;gap:40px;justify-content:center;margin-top:36px;flex-wrap:wrap;}
+  .stat{text-align:center;}
+  .stat-num{font-size:36px;font-weight:700;color:var(--gold);}
+  .stat-label{font-size:13px;color:rgba(255,255,255,0.6);margin-top:2px;}
+  .content{max-width:1000px;margin:0 auto;padding:60px 24px 80px;}
+  .category{margin-bottom:60px;}
+  .category-header{display:flex;align-items:center;gap:16px;margin-bottom:28px;padding-bottom:16px;border-bottom:2px solid var(--gold);}
+  .category-icon{width:44px;height:44px;background:var(--navy);border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .category-icon svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+  .category-header h2{font-size:20px;color:var(--navy);font-weight:700;}
+  .course-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px;}
+  .course-item{background:#fff;border:1.5px solid #e8eaed;border-radius:10px;padding:20px 22px;transition:border-color .2s,box-shadow .2s,transform .2s;position:relative;}
+  .course-item:hover{border-color:var(--gold);box-shadow:0 4px 20px rgba(201,164,92,0.15);transform:translateY(-3px);}
+  .course-num{position:absolute;top:16px;right:16px;width:26px;height:26px;background:var(--gray-bg);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--navy);}
+  .course-item h3{font-size:15px;color:var(--navy);font-weight:700;margin-bottom:8px;padding-right:32px;line-height:1.4;}
+  .course-item p{font-size:13px;color:#5a5f68;line-height:1.6;}
+  footer{background:var(--navy-dark);color:#aeb8c4;text-align:center;padding:28px 20px;font-size:13px;}
+  .footer-links{margin-bottom:10px;}
+  .footer-links a{color:#aeb8c4;margin:0 12px;transition:color .2s;}
+  .footer-links a:hover{color:var(--gold);}
+  @media(max-width:768px){.page-hero h1{font-size:24px;}.course-list{grid-template-columns:1fr;}.stats{gap:24px;}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-icon-box"><img src="logo.png" alt="風簷卓越企管"></div>
+      <div class="logo-text">
+        <span class="logo-text-main">風簷卓越企管</span>
+        <span class="logo-text-sub">Feng Yan Excellence Consulting</span>
+      </div>
+    </a>
+    <a href="index.html#courses" class="back-btn">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      返回課程總覽
+    </a>
+  </div>
+</header>
+
+<div class="page-hero">
+  <div class="badge">高　階</div>
+  <h1>地區經理與處級主管</h1>
+  <p>全局營運、文化傳承 — 從組織戰略到人才梯隊，鍛造頂層領導者的全方位視野</p>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">20</div><div class="stat-label">精選堂課</div></div>
+    <div class="stat"><div class="stat-num">4</div><div class="stat-label">學習主軸</div></div>
+    <div class="stat"><div class="stat-num">∞</div><div class="stat-label">實戰應用</div></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="category">
+    <div class="category-header">
+      <div class="category-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div>
+        <div>一、Selling Skill</div>
+        <h2>組織銷售戰略</h2>
+      </div>
+    </div>
+    <div class="course-list">
+      <div class="course-item">
+        <div class="course-num">01</div>
+        <h3>頂層人脈經營與大老對話藝術</h3>
+        <p>與醫學中心院長級別、學會理事長進行戰略性對話。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">02</div>
+        <h3>跨區域戰略結盟與資源整合</h3>
+        <p>打破區域界線，策劃全國性或區域聯防的重大專案。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">03</div>
+        <h3>危機處理與重大客訴應對</h3>
+        <p>面對藥物不良反應 (ADR) 或公關危機時的最高層級處理機制。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">04</div>
+        <h3>健保政策變遷下的戰略轉向</h3>
+        <p>精準預判藥價調整與給付規定改變，提前佈局產品線。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">05</div>
+        <h3>高階談判與合約審查</h3>
+        <p>與大型聯標體系或關鍵供應鏈進行底線交涉與條件捍衛。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-header">
+      <div class="category-icon">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div>
+        <div>二、People Skill</div>
+        <h2>高階領導與文化建立</h2>
+      </div>
+    </div>
+    <div class="course-list">
+      <div class="course-item">
+        <div class="course-num">06</div>
+        <h3>領導發展與激勵 (LD&M)</h3>
+        <p>透過周哈里窗了解自身領導風格，針對不同世代同仁精準激勵。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">07</div>
+        <h3>企業文化落地與團隊認同</h3>
+        <p>汲取標竿外商的精實作風，形塑專屬業務處的狼性與溫度。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">08</div>
+        <h3>教練式領導與高階提問藝術</h3>
+        <p>不直接給答案，而是透過深度對話激發地區經理的潛能。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">09</div>
+        <h3>精準選才與高階面試實務</h3>
+        <p>辨識具備純粹執行力與良好 DNA 的將才，把關部門人才庫。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">10</div>
+        <h3>組織變革管理與溝通</h3>
+        <p>在制度調整或部門重組時，穩定軍心並引導團隊擁抱變化。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-header">
+      <div class="category-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <div>
+        <div>三、Territory Management</div>
+        <h2>全局營運與績效管理</h2>
+      </div>
+    </div>
+    <div class="course-list">
+      <div class="course-item">
+        <div class="course-num">11</div>
+        <h3>全方位業務經營與管理 (BMW)</h3>
+        <p>統籌全局，掌握業績預測、計畫行動與管理決策的核心步驟。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">12</div>
+        <h3>管理職能與實務教導 (M&CIP)</h3>
+        <p>落實高質量的聯合拜訪，將第一線教導轉化為部門戰力。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">13</div>
+        <h3>高效率業務團隊研習營 (TBW)</h3>
+        <p>排除破壞團隊效率的五大因素，打造互信的作戰部隊。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">14</div>
+        <h3>品質管理系統與 SOP 監督</h3>
+        <p>落實 ISO 9001 精神，確保各項表單與規範成為助力而非阻力。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">15</div>
+        <h3>高階績效追蹤與 PIP 法規防護</h3>
+        <p>制定合理且具備挑戰性的考核標準，完備人員異動的管理程序。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="category">
+    <div class="category-header">
+      <div class="category-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      </div>
+      <div>
+        <div>四、Mindset &amp; Knowledge</div>
+        <h2>組織發展與頂層戰略</h2>
+      </div>
+    </div>
+    <div class="course-list">
+      <div class="course-item">
+        <div class="course-num">16</div>
+        <h3>大數據驅動的管理儀表板應用</h3>
+        <p>以自動化系統取代人工報表，用實時數據進行戰略決策。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">17</div>
+        <h3>從第一性原理重塑部門願景</h3>
+        <p>制定清晰、不可動搖的年度戰略主軸，讓全員力出一孔。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">18</div>
+        <h3>產品生命週期 (PLC) 戰略</h3>
+        <p>針對導入期、成長期與衰退期產品，配置最適合的部隊與資源。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">19</div>
+        <h3>部門年度預算與 P&L 損益管理</h3>
+        <p>掌握財務報表邏輯，以經營企業的高度管理業務處。</p>
+      </div>
+      <div class="course-item">
+        <div class="course-num">20</div>
+        <h3>企業接班人計畫與將才傳承</h3>
+        <p>建立穩定的人才梯隊，確保成功經驗化作源源不絕的成長動能。</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-links">
+    <a href="index.html">回首頁</a>
+    <a href="courses-junior.html">初階課程</a>
+    <a href="courses-mid.html">中階課程</a>
+  </div>
+  © 2026 風簷卓越企管 Feng Yan Excellence Consulting. All Rights Reserved.
+</footer>
+
+</body>
+</html>
