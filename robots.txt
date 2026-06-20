@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gibsonfu.github.io/fengyen/sitemap.xml
